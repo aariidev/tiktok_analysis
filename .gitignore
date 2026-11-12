@@ -1,0 +1,48 @@
+# Archivos de trabajo intermedios — no subir al repositorio
+_work/
+
+# Evidencia cruda (binarios grandes, dumps)
+_evidence/*.bin
+_evidence/*.dmg
+_evidence/*.ipa
+
+# Proyectos de Ghidra (pueden ser muy grandes)
+_work/ghidra/*.zip
+_work/ghidra/*.ghidra
+
+# IPA descifrado (puede ser ~500MB)
+_work/ipa/*.ipa
+
+# Headers generados (muchos archivos pequeños)
+# Descomentar si no quieres subirlos:
+# _work/headers/
+
+# Strings extraídos (pueden ser grandes)
+# _work/strings/*.txt
+
+# macOS
+.DS_Store
+*.swp
+*.swo
+*~
+
+# IDEs
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# System cache and config (not project files)
+.cache/
+.config/
+.mozilla/
+
+# Logs
+*.log
