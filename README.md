@@ -33,7 +33,7 @@
 ## Estructura del proyecto
 
 ```
-tiktok_nomeespiesquetedoy/
+tiktok_analysis/
 ├── README.md                 ← este archivo
 ├── docs/                     ← informes de análisis (uno por tema)
 │   ├── 00-methodology.md     ← herramientas, versión del IPA, proceso de extracción
