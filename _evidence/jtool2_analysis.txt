@@ -1,0 +1,194 @@
+# Fase 2: jtool2 — Inspección Mach-O de MusicallyCore
+
+## Información general
+
+| Campo | Valor |
+|---|---|
+| Binario | `MusicallyCore.framework/MusicallyCore` |
+| Tamaño | 866.9 MB (908,989,360 bytes) |
+| Arquitectura | arm64 |
+| Tipo | MH_DYLIB (dynamic library) |
+| Load commands | 189 |
+| Flags | 0x6910085 |
+| UUID | `28cc5534-882f-7900-2900-000010000000` |
+
+## Estado de cifrado
+
+- **Crypt ID:** No encontrado (sin LC_ENCRYPTION_INFO)
+- **Estado:** ✅ **NO CIFRADO** — El binario fue descifrado por TTKiller Plus (@FastDecryptBot)
+- Al no tener `LC_ENCRYPTION_INFO`, el binario está completamente accesible para análisis estático
+
+## Segments
+
+| Segment | Secciones | Tamaño | Descripción |
+|---|---|---|---|
+| `__TEXT` | 31 | 745,029,632 bytes |  |
+| `__DATA_CONST` | 15 | 38,633,472 bytes | Datos |
+| `__DATA` | 71 | 93,749,248 bytes | Datos |
+| `Data` | 1 | 16,384 bytes |  |
+| `__LYNX__DATA` | 1 | 16,384 bytes | Datos |
+| `HTS_ecommerce` | 1 | 16,384 bytes |  |
+| `HTS_kids_mode` | 2 | 16,384 bytes |  |
+| `__MKSD_DATA` | 1 | 16,384 bytes | Datos |
+| `__LINKEDIT` | 0 | 31,495,088 bytes |  |
+
+## Dynamic Libraries (116)
+
+### Frameworks del sistema iOS
+
+Total: 65 frameworks del sistema
+
+### Frameworks relevantes para privacidad
+
+| Framework | Propósito de recolección de datos |
+|---|---|
+| `ARKit` | Realidad aumentada |
+| `Accounts` | Cuentas del sistema |
+| `AdSupport` | IDFA (identificador publicitario) |
+| `BackgroundTasks` | Tareas en segundo plano |
+| `CallKit` | Llamadas VoIP |
+| `CloudKit` | iCloud |
+| `CoreML` | Machine Learning |
+| `CoreMotion` | Acelerómetro, giroscopio, magnetómetro |
+| `CoreSpotlight` | Búsqueda Spotlight |
+| `CoreTelephony` | Información de red celular |
+| `EventKit` | Calendario |
+| `EventKitUI` | Calendario |
+| `GameController` | Controladores de juego |
+| `LocalAuthentication` | TouchID/FaceID |
+| `MapKit` | Mapas y geolocalización |
+| `PassKit` | Apple Pay/Wallet |
+| `Photos` | Galería de fotos |
+| `PhotosUI` | Galería de fotos |
+| `SafariServices` | Safari/WebView |
+| `Security` | Keychain, certificados |
+| `Social` | Redes sociales |
+| `Speech` | Reconocimiento de voz |
+| `UserNotifications` | Notificaciones |
+| `Vision` | Reconocimiento visual/ML |
+| `CoreBluetooth` | Bluetooth |
+| `NetworkExtension` | Acceso a red avanzada |
+| `PushKit` | Push notifications |
+
+### Librerías del sistema
+
+- `/lib/libSystem.B.dylib`
+- `/lib/libbz2.1.0.dylib`
+- `/lib/libc++.1.dylib`
+- `/lib/libc++abi.dylib`
+- `/lib/libcompression.dylib`
+- `/lib/libiconv.2.dylib`
+- `/lib/libicucore.A.dylib`
+- `/lib/liblzma.5.dylib`
+- `/lib/libobjc.A.dylib`
+- `/lib/libresolv.9.dylib`
+- `/lib/libsqlite3.dylib`
+- `/lib/libxml2.2.dylib`
+- `/lib/libz.1.dylib`
+- `/lib/swift/libswiftAVFoundation.dylib`
+- `/lib/swift/libswiftAccelerate.dylib`
+- `/lib/swift/libswiftCallKit.dylib`
+- `/lib/swift/libswiftCore.dylib`
+- `/lib/swift/libswiftCoreAudio.dylib`
+- `/lib/swift/libswiftCoreFoundation.dylib`
+- `/lib/swift/libswiftCoreGraphics.dylib`
+- `/lib/swift/libswiftCoreMedia.dylib`
+- `/lib/swift/libswiftDarwin.dylib`
+- `/lib/swift/libswiftDispatch.dylib`
+- `/lib/swift/libswiftFoundation.dylib`
+- `/lib/swift/libswiftIntents.dylib`
+- `/lib/swift/libswiftNaturalLanguage.dylib`
+- `/lib/swift/libswiftOSLog.dylib`
+- `/lib/swift/libswiftObjectiveC.dylib`
+- `/lib/swift/libswiftPhotos.dylib`
+- `/lib/swift/libswiftPhotosUI.dylib`
+- `/lib/swift/libswiftQuartzCore.dylib`
+- `/lib/swift/libswiftSceneKit.dylib`
+- `/lib/swift/libswiftUIKit.dylib`
+- `/lib/swift/libswiftUniformTypeIdentifiers.dylib`
+- `/lib/swift/libswiftVision.dylib`
+- `/lib/swift/libswift_Concurrency.dylib`
+- `/lib/swift/libswiftos.dylib`
+
+### Librerías Swift
+
+- `/lib/swift/libswiftAVFoundation.dylib`
+- `/lib/swift/libswiftAccelerate.dylib`
+- `/lib/swift/libswiftCallKit.dylib`
+- `/lib/swift/libswiftCore.dylib`
+- `/lib/swift/libswiftCoreAudio.dylib`
+- `/lib/swift/libswiftCoreFoundation.dylib`
+- `/lib/swift/libswiftCoreGraphics.dylib`
+- `/lib/swift/libswiftCoreMedia.dylib`
+- `/lib/swift/libswiftDarwin.dylib`
+- `/lib/swift/libswiftDispatch.dylib`
+- `/lib/swift/libswiftFoundation.dylib`
+- `/lib/swift/libswiftIntents.dylib`
+- `/lib/swift/libswiftNaturalLanguage.dylib`
+- `/lib/swift/libswiftOSLog.dylib`
+- `/lib/swift/libswiftObjectiveC.dylib`
+- `/lib/swift/libswiftPhotos.dylib`
+- `/lib/swift/libswiftPhotosUI.dylib`
+- `/lib/swift/libswiftQuartzCore.dylib`
+- `/lib/swift/libswiftSceneKit.dylib`
+- `/lib/swift/libswiftUIKit.dylib`
+- `/lib/swift/libswiftUniformTypeIdentifiers.dylib`
+- `/lib/swift/libswiftVision.dylib`
+- `/lib/swift/libswift_Concurrency.dylib`
+- `/lib/swift/libswiftos.dylib`
+
+### Frameworks embebidos (terceros/propios)
+
+- `AAAASingularity.framework/AAAASingularity`
+- `AAWEBootChecker.framework/AAWEBootChecker`
+- `AAWELaunchTracker.framework/AAWELaunchTracker`
+- `OMSDK_Bytedance1.framework/OMSDK_Bytedance1`
+- `SCSDKCoreKit.framework/SCSDKCoreKit`
+- `SCSDKCreativeKit.framework/SCSDKCreativeKit`
+- `SpotifyLogin.framework/SpotifyLogin`
+- `TTFFmpeg.framework/TTFFmpeg`
+- `TTPOrbuService.framework/TTPOrbuService`
+- `WCDBSQLCipherFrameworkA.framework/WCDBSQLCipherFrameworkA`
+- `boringssl.framework/boringssl`
+- `bytevc1enc.framework/bytevc1enc`
+- `crypto.framework/crypto`
+- `ffmpeg_dashdec.framework/ffmpeg_dashdec`
+- `libvcn.framework/libvcn`
+
+## Entitlements
+
+| Entitlement | Valor | Implicación de privacidad |
+|---|---|---|
+| `application-identifier` | `MJ797D8U6F.com.zhiliaoapp.musically` | Identificador único de la app |
+| `aps-environment` | `production` | Push notifications (production) |
+| `com.apple.developer.applesignin` | `Default` | Login con Apple |
+| `com.apple.developer.associated-domains` | `applinks:dm-me.tiktok.com` | App Links/Universal Links |
+| `com.apple.developer.declared-age-range` | `applinks:www.tiktok.me` |  |
+| `com.apple.developer.group-session` | `applinks:tiktok.me` | Group activities |
+| `com.apple.developer.in-app-payments` | `applinks:shop.tiktok.com` | Pagos en app |
+| `com.apple.developer.kernel.extended-virtual-addressing` | `applinks:oec-api.tiktokv.com` | Memoria extendida |
+| `com.apple.developer.kernel.increased-memory-limit` | `applinks:v.tiktok.com` | Límite de memoria aumentado |
+| `com.apple.developer.networking.multicast` | `applinks:tiktok.com` | Multicast networking |
+| `com.apple.developer.networking.wifi-info` | `applinks:www.tiktok.com` | Info de red Wi-Fi (BSSID, SSID) |
+| `com.apple.developer.pass-type-identifiers` | `applinks:m.tiktok.com` | Apple Wallet passes |
+| `com.apple.developer.payment-pass-provisioning` | `applinks:vm.tiktok.com` | Provisioning de pagos |
+| `com.apple.developer.siri` | `applinks:snssdk1233.onelink.me` | Integración con Siri |
+| `com.apple.developer.storekit.request-data` | `applinks:app-va.tiktokv.com` | StoreKit data |
+| `com.apple.developer.team-identifier` | `applinks:link.e.tiktok.com` | Team ID de desarrollador |
+| `com.apple.developer.usernotifications.communication` | `applinks:us.tiktok.com` | Notificaciones de comunicación |
+| `com.apple.developer.usernotifications.time-sensitive` | `applinks:vt.tiktok.com` | Notificaciones sensibles al tiempo |
+| `com.apple.security.application-groups` | `applinks:t.tiktok.com` | Shared app group container |
+| `get-task-allow` | `applinks:in.tiktok.com` | Debugging allowed |
+| `keychain-access-groups` | `applinks:www.tiktok.in` | Acceso a Keychain |
+
+## Code Signature
+
+- No code signature found
+
+## Resumen de hallazgos clave
+
+1. **Binario NO cifrado:** TTKiller Plus descifró el binario completamente, permitiendo análisis estático total
+2. **116 dynamic libraries:** Incluye frameworks sensibles como CoreMotion, CoreLocation, AdSupport, CoreTelephony
+3. **Entitlements extensivos:** Acceso a Wi-Fi info, Keychain, push notifications, Siri, Group Activities
+4. **Framework de privacidad detectados:** CoreMotion (sensores), CoreLocation (GPS), AdSupport (IDFA), CoreTelephony (celular), LocalAuthentication (biometría)
+5. **Librerías de terceros:** SpotifyLogin, ffmpeg, SQLCipher (encriptación de DB local), boringssl (TLS)

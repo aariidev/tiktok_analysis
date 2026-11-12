@@ -2,7 +2,8 @@
 
 > **Pregunta central:** ¿Qué datos recopila TikTok en iOS y cómo los envía a ByteDance?
 > **Método:** Análisis estático del binario Mach-O de la app de TikTok para iPhone (IPA desempaquetada).
-> **Estado:** ✅ Análisis completado — TikTok v47.7.0 (build 477034)
+> **Estado:** ✅ Completado — TikTok v47.7.0 (build 477034)
+> **Fases completadas:** Info.plist, PrivacyInfo, strings (50M), endpoints, fingerprinting, frameworks, Swift reflection, class-dump, jtool2, verificación de cifrado
 
 ---
 
@@ -44,14 +45,26 @@ tiktok_analysis/
 │   ├── 05-device-fingerprinting.md
 │   ├── 06-embedded-frameworks.md
 │   ├── 07-swift-reflection.md
-│   └── 08-summary-and-findings.md
+│   ├── 08-summary-and-findings.md
+│   ├── 09-class-dump-jtool2-analysis.md  ← resultados de class-dump y jtool2
+│   └── SETUP.md              ← guía de instalación de herramientas
 ├── _work/                    ← archivos intermedios de trabajo
 │   ├── ipa/                  ← IPA extraído y descifrado
+│   │   ├── TikTok.ipa        ← coloca el IPA aquí
+│   │   ├── TikTok_extracted/ ← IPA descomprimido
+│   │   └── decrypted/        ← binario descifrado con Frida
 │   ├── strings/              ← salida de strings por binario
 │   ├── headers/              ← headers de class-dump
 │   └── ghidra/               ← proyectos de Ghidra
 ├── _evidence/                ← evidencia cruda (logs, dumps, capturas)
+│   ├── Info.plist
+│   ├── PrivacyInfo.xcprivacy
+│   ├── jtool2_analysis.txt   ← resultados de jtool2
+│   └── radare2_imports.txt   ← imports analizados con radare2
 └── scripts/                  ← scripts de automatización
+    ├── install_tools.sh      ← instala class-dump, jtool2, Frida
+    ├── run_analysis.sh       ← ejecuta las 3 fases (class-dump, jtool2, descifrado)
+    ├── decrypt_binary.py     ← descifra binario con Frida
     ├── extract_strings.sh
     ├── dump_classes.sh
     └── analyze_endpoints.sh
@@ -90,9 +103,23 @@ tiktok_analysis/
 
 ---
 
-## Flujo de trabajo
+## Flujo de trabajo rápido
 
-### Fase 1: Obtención del IPA
+### Opción 1: Script automático (Recomendado)
+
+```bash
+# 1. Instalar herramientas (requiere sudo)
+bash scripts/install_tools.sh
+
+# 2. Colocar el IPA descifrado en _work/ipa/TikTok.ipa
+
+# 3. Ejecutar las 3 fases automáticamente
+bash scripts/run_analysis.sh
+```
+
+### Opción 2: Paso a paso
+
+#### Fase 1: Obtención del IPA
 
 1. Conectar el dispositivo iOS vía USB
 2. Instalar `frida-server` en el dispositivo (requiere jailbreak) o usar TrollStore
@@ -105,7 +132,7 @@ tiktok_analysis/
    ```
 4. Colocar el IPA resultante en `_work/ipa/`
 
-### Fase 2: Extracción inicial
+#### Fase 2: Extracción inicial
 
 ```bash
 # Descomprimir IPA (es un archivo ZIP)
@@ -116,31 +143,48 @@ unzip TikTok.ipa -d TikTok_extracted
 ls -la TikTok_extracted/Payload/TikTok.app/
 ```
 
-### Fase 3: Análisis estático
+#### Fase 3: class-dump — Headers Objective-C
 
 ```bash
-# Strings en el binario principal
-strings TikTok_extracted/Payload/TikTok.app/TikTok > _work/strings/main.txt
+# Extraer headers del binario principal
+class-dump -H -o _work/headers _work/ipa/TikTok_extracted/Payload/TikTok.app/Frameworks/MusicallyCore.framework/MusicallyCore
 
-# Strings en frameworks embebidos
-for fw in TikTok_extracted/Payload/TikTok.app/Frameworks/*.framework/*; do
-    strings "$fw" > "_work/strings/$(basename $fw).txt"
-done
-
-# Class-dump para headers Objective-C
-class-dump -h _work/headers -f TikTok_extracted/Payload/TikTok.app/TikTok
-
-# Entitlements
-jtool2 --ent TikTok_extracted/Payload/TikTok.app/TikTok
-
-# Info.plist
-cat TikTok_extracted/Payload/TikTok.app/Info.plist
+# Buscar clases relacionadas con privacidad
+grep -rl "analytics\|tracking\|telemetry" _work/headers/*.h
+grep -rl "device\|fingerprint\|identifier" _work/headers/*.h
+grep -rl "location\|motion\|sensor" _work/headers/*.h
 ```
 
-### Fase 4: Análisis con Ghidra
+#### Fase 4: jtool2 — Inspección Mach-O
+
+```bash
+# Entitlements
+jtool2 --ent _work/ipa/TikTok_extracted/Payload/TikTok.app/Frameworks/MusicallyCore.framework/MusicallyCore
+
+# Dynamic Libraries
+jtool2 --dylib _work/ipa/TikTok_extracted/Payload/TikTok.app/Frameworks/MusicallyCore.framework/MusicallyCore
+
+# Encryption Info
+jtool2 --encrypt _work/ipa/TikTok_extracted/Payload/TikTok.app/Frameworks/MusicallyCore.framework/MusicallyCore
+
+# UUID y Load Commands
+jtool2 --uuid _work/ipa/TikTok_extracted/Payload/TikTok.app/Frameworks/MusicallyCore.framework/MusicallyCore
+jtool2 --lcs _work/ipa/TikTok_extracted/Payload/TikTok.app/Frameworks/MusicallyCore.framework/MusicallyCore
+```
+
+#### Fase 5: Descifrado de binario cifrado
+
+Si el binario está cifrado (cryptid > 0), se requiere un dispositivo iOS con Frida:
+
+```bash
+# Analizar cifrado y extraer binario descifrado
+python3 scripts/decrypt_binary.py
+```
+
+#### Fase 6: Análisis con Ghidra
 
 1. Abrir Ghidra
-2. Importar el binario principal `TikTok`
+2. Importar el binario principal `MusicallyCore`
 3. Importar frameworks de interés
 4. Buscar referencias a:
    - URLs y endpoints de red
@@ -149,7 +193,7 @@ cat TikTok_extracted/Payload/TikTok.app/Info.plist
    - Keychain y almacenamiento local
    - Contactos, fotos, y otros datos del usuario
 
-### Fase 5: Redacción de informes
+#### Fase 7: Redacción de informes
 
 Cada informe en `docs/` debe incluir:
 - **Método:** Qué herramienta y qué comando se usó
